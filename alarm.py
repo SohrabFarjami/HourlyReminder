@@ -1,14 +1,27 @@
 from datetime import datetime
 from text_to_speech import speak
 from time import time, sleep
-    
-print('Time management protocol activated')
+import os
+from gtts import gTTS
+import vlc
+
 stop = False ## To loop forever
 while stop == False:
     now = datetime.now()
-    if now.minute == 0 and now.second == 0: ##When minute and second is both 0 its a new hour     
-        messageUser = ('It is now ' + now.strftime("%I %p"))
-        speak(messageUser, "en", save=True, file="schedule.mp3")
+    second = now.second
+    minute = now.minute
+    if second == 0 and minute == 0:
+        myText = 'It is now ' + (now.strftime("%I %p"))
+        print(myText)
+        output = gTTS(text=myText, lang='en', slow=False)
+        output.save("Time.mp3")
+        p = vlc.MediaPlayer("Time.mp3")
+        p.play()
+        sleep(10)
+        os.remove("Time.mp3")
+
+
+        
         
         
 

@@ -16,6 +16,9 @@ while stop == False:
         output = gTTS(text=myText, lang='en', slow=False)
         output.save("Time.mp3")
         p = vlc.MediaPlayer("Time.mp3")
+        media_player = vlc.MediaPlayer()
+        media_player.set_media(p)
+        media_player.audio_set_volume(50)
         p.play()
         sleep(10)
         os.remove("Time.mp3")
@@ -24,5 +27,4 @@ while stop == False:
         
         
         
-
 
